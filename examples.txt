@@ -1,0 +1,1 @@
+jem push -> gets the manifest in the current dir and loads that

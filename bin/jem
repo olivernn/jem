@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'jem'
+# require 'jem/lib/command'
+
+args = ARGV.dup
+ARGV.clear
+command = args.shift.strip rescue 'help'
+
+Jem::Command.run(command)
+
