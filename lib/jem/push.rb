@@ -10,7 +10,7 @@ module Jem
     end
 
     def push
-      RestClient.put "#{Jem::HOST}#{PATH}?#{signature_querystring}",
+      RestClient.put "#{Jem.host}#{PATH}?#{signature_querystring}",
         request_body.merge(:multipart => true)
     rescue RestClient::Unauthorized => e
       raise Jem::WrongCredentials, e.response.body

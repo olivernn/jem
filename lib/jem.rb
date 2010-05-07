@@ -6,14 +6,13 @@ require 'rest_client'
 require 'signature'
 
 module Jem
-  HOST = 'http://10.9.8.231:3000'
-
+  
   class << self
-    @host = HOST.dup
-
     attr_accessor :host
   end
 end
+
+Jem.host = 'http://localhost:3000'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/jem')
 

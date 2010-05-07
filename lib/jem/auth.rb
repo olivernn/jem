@@ -17,7 +17,7 @@ module Jem
 
     def login
       ask_for_login
-      new_credentials = RestClient.put "#{Jem::HOST}/api/accounts", {
+      new_credentials = RestClient.put "#{Jem.host}/api/accounts", {
         :email => email, :password => password
       }
       puts new_credentials.inspect
