@@ -1,5 +1,5 @@
+require 'rubygems'
 require 'uri'
-
 require 'highline'
 require 'json'
 require 'rest_client'

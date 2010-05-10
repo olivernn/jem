@@ -2,7 +2,7 @@ module Jem
   class Command
     class << self
       attr_accessor :host
-      
+
       def run(command)
         send(command)
       end
