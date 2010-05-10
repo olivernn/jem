@@ -6,9 +6,10 @@ module Jem
     attr_reader :attributes
 
     def initialize
+      raise Jem::ManifestMissing unless File.exists?(MANIFEST_FILE_NAME)
       @attributes = JSON.parse(File.read(MANIFEST_FILE_NAME))
     rescue JSON::ParserError
-      raise Jem::InvalidManifest
+      raise Jem::ManifestInvalid
     end
 
     def self.create(options)

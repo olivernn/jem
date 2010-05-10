@@ -9,7 +9,7 @@ class TestManifest < Test::Unit::TestCase
   end
 
   def teardown
-    File.delete('manifest.json')
+    File.delete('manifest.json') if File.exists?('manifest.json')
   end
 
   def remove_test_manifest!
@@ -90,7 +90,14 @@ class TestManifest < Test::Unit::TestCase
   test "throwing an error if the manifest is invalid json" do
     remove_test_manifest!
     create_invalid_manifest!
-    assert_raise Jem::InvalidManifest do
+    assert_raise Jem::ManifestInvalid do
+      Jem::Manifest.new
+    end
+  end
+
+  test "throwing an error if the manifest couldn't be found" do
+    remove_test_manifest!
+    assert_raise Jem::ManifestMissing do
       Jem::Manifest.new
     end
   end
