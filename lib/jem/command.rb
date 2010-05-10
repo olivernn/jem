@@ -1,10 +1,14 @@
 module Jem
-  class Command
+  module Command
     class << self
       attr_accessor :host
 
       def run(command)
-        send(command)
+        if namespaced? command
+          Jem::Command.const_get(namespace_from(command).capitalize).send(method_from(command))
+        else
+          send(command)
+        end
       end
 
       def init
@@ -25,8 +29,27 @@ module Jem
       end
 
       def hello
-        puts "Hello"
+        puts "hello!"
       end
+
+      private
+
+      def namespaced? command
+        !!command.match(/:/)
+      end
+
+      def namespace_from command
+        parse(command)[0]
+      end
+
+      def method_from command
+        parse(command)[1]
+      end
+
+      def parse command
+        command.split(':')
+      end
+
     end
   end
 end
